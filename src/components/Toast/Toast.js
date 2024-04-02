@@ -28,7 +28,7 @@ function Toast({ variant = 'notice', id, children, }) {
 
   const Icon = ICONS_BY_VARIANT[variant]
 
-  const uek = useEscapeKey(() => {
+  useEscapeKey(() => {
     dismissToast(id)
   })
 
