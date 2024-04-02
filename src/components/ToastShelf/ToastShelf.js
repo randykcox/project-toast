@@ -15,7 +15,9 @@ function ToastShelf() {
           <li key={id} className={styles.toastWrapper}>
             <Toast variant={variant} handleDismiss={() => {
               dismissToast(id)
-            }}>{message}</Toast>
+            }}>
+              {message}
+            </Toast>
           </li>
         )
       })}

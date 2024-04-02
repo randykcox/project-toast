@@ -9,14 +9,14 @@ function ToastPlayground() {
 
   const { createToast, variants } = React.useContext(ToastContext)
   const [message, setMessage] = React.useState('')
-  const [variant, setVariant] = React.useState('notice')
+  const [variant, setVariant] = React.useState(variants[0])
   const messageInputRef = React.useRef()
 
   function handleFormSubmit(event) {
     event.preventDefault()
     createToast(message, variant)
     setMessage('')
-    setVariant('notice')
+    setVariant(variants[0])
     messageInputRef.current.focus()
   }
 
