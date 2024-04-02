@@ -1,6 +1,8 @@
 import React from 'react';
 
 import useEscapeKey from '../../hooks/use-escape-key'
+import { ToastContext } from '../ToastProvider'
+
 
 import {
   AlertOctagon,
@@ -21,10 +23,14 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ children, variant = 'notice', handleDismiss }) {
+function Toast({ variant = 'notice', id, children, }) {
+  const { dismissToast } = React.useContext(ToastContext)
+
   const Icon = ICONS_BY_VARIANT[variant]
 
-  const uek = useEscapeKey(handleDismiss)
+  const uek = useEscapeKey(() => {
+    dismissToast(id)
+  })
 
   return (
     <div className={`${styles.toast} ${styles[variant]}`}>
@@ -39,7 +45,7 @@ function Toast({ children, variant = 'notice', handleDismiss }) {
         aria-label="Dismiss message"
         aria-live="off"
       onClick={event => {
-        handleDismiss()
+        dismissToast(id)
       }}>
         <X size={24} />
       </button>
