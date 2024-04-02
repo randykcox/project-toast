@@ -1,4 +1,7 @@
 import React from 'react';
+
+import useEscapeKey from '../../hooks/use-escape-key'
+
 import {
   AlertOctagon,
   AlertTriangle,
@@ -21,19 +24,7 @@ const ICONS_BY_VARIANT = {
 function Toast({ children, variant = 'notice', handleDismiss }) {
   const Icon = ICONS_BY_VARIANT[variant]
 
-  React.useEffect(() => {
-    function dismissOnEscape(event) {
-      if (event.code === 'Escape') {
-        handleDismiss()
-      }
-    }
-
-    document.addEventListener('keydown', dismissOnEscape)
-
-    return () => {
-      document.removeEventListener('keydown', dismissOnEscape)
-    }
-  }, [])
+  const uek = useEscapeKey(handleDismiss)
 
   return (
     <div className={`${styles.toast} ${styles[variant]}`}>
